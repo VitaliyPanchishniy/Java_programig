@@ -32,20 +32,20 @@ public class Picture extends Application {
         brushSizeSelector.setPrefWidth(200);
         brushSizeSelector.valueProperty().addListener((observable, oldValue, newValue) -> brushSize = newValue.doubleValue());
 
-        // Створення нижньої панелі
+
         HBox controlPanel = new HBox(10, brushLabel, brushSizeSelector);
         controlPanel.setPadding(new Insets(10));
         controlPanel.setStyle("-fx-background-color: #f0f0f0;");
         controlPanel.setMaxHeight(40);
 
-        // Подія для видалення частини малюнка
+
         canvas.setOnMouseDragged(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
                 gc.clearRect(e.getX() - brushSize / 2, e.getY() - brushSize / 2, brushSize, brushSize);
             }
         });
 
-        // Повернення початкового стану при потрійному натисканні
+
         canvas.setOnMouseClicked(e -> {
             if (e.getClickCount() == 3) {
                 drawInitialCanvas();
@@ -64,19 +64,16 @@ public class Picture extends Application {
 
     // Малюнок кавуна
     private void drawInitialCanvas() {
-        // Фон
+
         gc.setFill(Color.LIGHTBLUE);
         gc.fillRect(0, 0, 800, 600);
 
-        // Зовнішня частина кавуна
         gc.setFill(Color.DARKGREEN);
         gc.fillOval(200, 150, 400, 300);
 
-        // Внутрішня частина кавуна
         gc.setFill(Color.RED);
         gc.fillOval(220, 170, 360, 260);
 
-        // Кісточки кавуна
         gc.setFill(Color.BLACK);
         double[][] seeds = {
                 {300, 200}, {350, 250}, {400, 220}, {280, 300}, {420, 300},
